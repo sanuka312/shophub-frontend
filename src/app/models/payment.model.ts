@@ -16,7 +16,7 @@ export default class Payment{
   ){
     this.paymentId=paymentId,
     this.orderId=orderId,
-    this.userId=userId
+    this.userId=userId,
     this.paymentMethod=paymentMethod,
     this.paymentStatus=paymentStatus,
     this.paymentAmount=paymentAmount
@@ -44,5 +44,29 @@ export default class Payment{
 
   getPaymentAmount():number{
     return this.paymentAmount
+  }
+
+  setPaymentId(paymentId:number):void{
+    this.paymentId=paymentId
+  }
+
+  setOrderId(orderId:number):void{
+    this.orderId=orderId
+  }
+
+  setUserId(userId:number):void{
+    this.userId=userId
+  }
+
+  setPaymentMethod(paymentMethod:string):void{
+    this.paymentMethod=paymentMethod
+  }
+
+  setPaymentStatus(paymentStatus:string):void{
+    this.paymentStatus=paymentStatus
+  }
+
+  setPaymentAmount(paymentAmount:number):void{
+    this.paymentAmount=paymentAmount
   }
 }
