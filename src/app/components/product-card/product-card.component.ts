@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './product-card.component.scss',
 })
 export class ProductCard {
-
+  
 }
 
 
