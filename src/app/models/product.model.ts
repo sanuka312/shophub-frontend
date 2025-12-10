@@ -7,12 +7,15 @@ export interface ProductImage {
 export interface Product {
   product_id: number;
   product_name: string;
-  price: number;
+  product_price: number;
   product_stock: number;
+  product_slug:string;
   category_id: number;
   category_name: string;
-  img_url_main:string;
-  images: ProductImage[];
+  image_url_main:string;
+  product_images?: ProductImage[];
 }
+
+
 
 
