@@ -9,8 +9,6 @@ import { CartItem } from "../models/cart.model";
 
 
 export interface AddToCartRequest{
-  user_id: number;
-  cart_id: number;
   product_id: number;
   quantity: number;
 }
@@ -24,25 +22,31 @@ export class CartService{
   constructor(private http:HttpClient){}
 
   //add items to cart
+  // Backend only expects product_id and quantity
+  // user_id is extracted from JWT token, cart_id is handled automatically
   addToCart(request:AddToCartRequest):Observable<any>{
-    return this.http.post(`${this.baseUrl}/item`,request);
+    return this.http.post(`${this.baseUrl}/item`, request);
   }
 
-  //TODO:get cart by user_id
-  getCartByUserId(userId:number):Observable<Cart>{
-    return this.http.get<Cart>(`${this.baseUrl}/${userId}`)
+  // Get user cart - backend extracts user_id from JWT token automatically
+  getUserCart():Observable<Cart>{
+    return this.http.get<Cart>(`${this.baseUrl}/`);
   }
 
-  //TODO:remove item from cart
-  removeItemFromCart(id:number):Observable<CartItem>{
-    return this.http.delete<CartItem>(`${this.baseUrl}/item/{:id}`)
+  // Remove item from cart by itemId
+  removeItemFromCart(itemId:number):Observable<any>{
+    return this.http.delete(`${this.baseUrl}/item/${itemId}`);
   }
 
-  clearCart(userId:number):Observable<Cart>{
-    return this.http.delete<Cart>(`${this.baseUrl}`)
+  // Update cart item quantity
+  updateCartItemQuantity(itemId:number, quantity:number):Observable<any>{
+    return this.http.patch(`${this.baseUrl}/item/${itemId}`, { quantity });
   }
 
-
+  // Clear entire cart - backend extracts user_id from JWT token
+  clearCart():Observable<any>{
+    return this.http.delete(`${this.baseUrl}/items`);
+  }
 }
 
 
