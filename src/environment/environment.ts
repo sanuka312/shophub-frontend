@@ -3,7 +3,8 @@ export const environment = {
   keycloak: {
     url: 'http://localhost:8080',
     realm: 'shophub',
-    clientId: 'backend-client',
+    clientId: 'frontend-client',
+    redirectUri: 'http://localhost:4200',
   },
   apiServiceUrl: 'http://localhost:9002',
 };
