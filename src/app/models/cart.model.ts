@@ -1,18 +1,24 @@
 export interface CartItem{
   id:number;
-  productId:number;
-  productName:string;
+  cart_id:number;
+  product_id:number;
+  unit_price:number;
   quantity:number;
-  productPrice:number; //Price of the item at the time of adding to the cart
-  totalPrice:number; // Product price * Quantity
-  addedDate:Date;
+  total_price:number; // Product price * Quantity (fixed typo: was total_pice)
+  is_selected:boolean;
+
+  product?:{
+    product_id:number;
+    product_name:string;
+    image_url_main:string;
+    product_price:number;
+    product_stock:number;
+  };
 }
 
 export interface Cart{
-  cartId:number;
-  userId:number;
-  itemCount:number; //keep tracks of number of items in the cart
-  total:number;//keep tracks total of the all the items in the cart
-  cartItems:CartItem[]
+  cart_id:number;
+  keycloak_user_id:string;
+  cart_items:CartItem[]; // Backend uses cart_items, not cartItems
 }
 
