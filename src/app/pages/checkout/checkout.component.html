@@ -1,0 +1,215 @@
+<div class="checkout-wrapper">
+  <div class="checkout-header">
+    <h2 class="checkout-title">Checkout</h2>
+    <p class="subtitle">Complete your purchase</p>
+  </div>
+
+  @if (!isLoading){
+    <div class="checkout-grid">
+      <!--Left Section-->
+      <div class="left-section">
+        <!--Shipping Information-->
+        <div class="checkout-card">
+          <div class="card-header">
+            <div class="icon-wrapper shipping-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10H3l2-5h14l-1 5z"></path>
+                <path d="M7 10v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9"></path>
+                <path d="M7 10l-4-6"></path>
+                <path d="M21 10l-4-6"></path>
+              </svg>
+            </div>
+            <h3 class="card-title">Shipping Information</h3>
+          </div>
+
+          <div class="form-content">
+            <div class="grid-2">
+              <div class="form-group">
+                <label>First Name <span class="required">*</span></label>
+                <input type="text" placeholder="Enter your first name" class="form-control" [(ngModel)]="address.first_name" required/>
+              </div>
+              <div class="form-group">
+                <label>Last Name <span class="required">*</span></label>
+                <input type="text" placeholder="Enter your last name" class="form-control" [(ngModel)]="address.last_name" required/>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Email <span class="required">*</span></label>
+                <input type="email" placeholder="Enter your email" class="form-control" [(ngModel)]="address.email" required/>
+              </div>
+              <div class="form-group">
+                <label>Phone <span class="required">*</span></label>
+                <input type="tel" placeholder="Enter your phone number" class="form-control" [(ngModel)]="address.phone" required/>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Address Line 1 <span class="required">*</span></label>
+                <input type="text" placeholder="Enter your address" class="form-control" [(ngModel)]="address.line1" required/>
+              </div>
+              <div class="form-group">
+                <label>Address Line 2</label>
+                <input type="text" placeholder="Apartment, suite, etc. (optional)" class="form-control" [(ngModel)]="address.line2" />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>City <span class="required">*</span></label>
+                <input type="text" placeholder="Enter your city" class="form-control" [(ngModel)]="address.city" required/>
+              </div>
+              <div class="form-group">
+                <label>Zip Code <span class="required">*</span></label>
+                <input type="text" placeholder="Enter your zip code" class="form-control" [(ngModel)]="address.postal_code" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Country <span class="required">*</span></label>
+              <input type="text" placeholder="Enter your country" class="form-control" [(ngModel)]="address.country" required/>
+            </div>
+          </div>
+        </div>
+
+        <!--Payment Information-->
+        <div class="checkout-card">
+          <div class="card-header">
+            <div class="icon-wrapper payment-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+            </div>
+            <h3 class="card-title">Payment Information</h3>
+          </div>
+
+          <div class="form-content">
+            <label class="payment-options-label">Payment Options</label>
+            <div class="payment-options-container">
+              <label class="payment-option" [class.payment-option-active]="paymentMethod === 'CARD'">
+                <input type="radio"
+                  name="payment_method"
+                  value="CARD"
+                  (change)="paymentMethod = 'CARD'"
+                  [checked]="paymentMethod === 'CARD'"
+                />
+                <div class="payment-option-content">
+                  <div class="payment-option-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                      <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                  </div>
+                  <span>Credit/Debit Card</span>
+                </div>
+              </label>
+
+              <label class="payment-option" [class.payment-option-active]="paymentMethod === 'COD'">
+                <input type="radio"
+                  name="payment_method"
+                  value="COD"
+                  (change)="paymentMethod = 'COD'"
+                  [checked]="paymentMethod === 'COD'"
+                />
+                <div class="payment-option-content">
+                  <div class="payment-option-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 6v6l4 2"></path>
+                    </svg>
+                  </div>
+                  <span>Cash on Delivery</span>
+                </div>
+              </label>
+            </div>
+
+            <!--Card details-->
+            @if (paymentMethod === 'CARD'){
+              <div class="card-details">
+                <div class="form-group">
+                  <label>Card Number <span class="required">*</span></label>
+                  <input type="text" placeholder="1234 5678 9012 3456" class="form-control" [(ngModel)]="cardNumber" required/>
+                </div>
+
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label>Expiration Date <span class="required">*</span></label>
+                    <input type="text" placeholder="MM/YY" class="form-control" [(ngModel)]="cardExpirationDate" [maxlength]="5" required/>
+                  </div>
+                  <div class="form-group">
+                    <label>CVV <span class="required">*</span></label>
+                    <input type="text" placeholder="123" class="form-control" [(ngModel)]="cardCvv" maxlength="4" required/>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!--Right Section - Order Summary-->
+      <div class="right-section">
+        <div class="summary-card">
+          <div class="card-header">
+            <div class="icon-wrapper summary-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"></path>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+            </div>
+            <h3 class="card-title">Order Summary</h3>
+          </div>
+
+          <div class="summary-items">
+            @for (item of selectedCartItems; track item.id){
+              <div class="summary-item">
+                <div class="item-image-wrapper">
+                  <img [src]="item.product?.image_url_main" [alt]="item.product?.product_name" class="summary-item-image"/>
+                </div>
+                <div class="item-info">
+                  <h4 class="item-name">{{item.product?.product_name}}</h4>
+                  <div class="item-details">
+                    <span class="item-price">Rs. {{item.product?.product_price | number:'1.2-2'}}</span>
+                    <span class="item-quantity">Qty: {{item.quantity}}</span>
+                  </div>
+                </div>
+                <div class="item-total">
+                  <span class="price">Rs. {{getItemTotal(item) | number:'1.2-2'}}</span>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-totals">
+            <div class="summary-line">
+              <span>Subtotal</span>
+              <span>Rs. {{SubTotal | number:'1.2-2'}}</span>
+            </div>
+            <div class="summary-line-total">
+              <span>Total</span>
+              <span>Rs. {{total | number:'1.2-2'}}</span>
+            </div>
+          </div>
+
+          <button
+            class="place-order-button"
+            (click)="placeOrder()"
+            [disabled]="isPlacingOrder">
+            @if (!isPlacingOrder){
+              <span>Place Order</span>
+            } @else {
+              <span class="loading-spinner"></span>
+              <span>Placing Order...</span>
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="loading-container">
+      <div class="loading-spinner-large"></div>
+      <p class="loading-text">Loading checkout...</p>
+    </div>
+  }
+</div>
