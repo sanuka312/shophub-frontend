@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-search-bar',
+  selector: 'app-search-bar.component',
   imports: [],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
 })
-export class SearchBar {
+export class SearchBarComponent {
 
 }
-
-
