@@ -18,7 +18,7 @@ export class ProductService {
     return this.http.get<Product>(`${this.apiUrl}/${productId}`);
   }
 
-  // Placeholder for slug-based endpoint once available on the backend
+  // Placeholder for slug-based endpoint
   getProductBySlug(productSlug: string): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/slug/${productSlug}`);
   }
