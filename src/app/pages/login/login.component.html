@@ -1,0 +1,31 @@
+<div class="login-page">
+  <div class="login-container">
+    <div class="login-header">
+      <h1>Welcome to ShopHub</h1>
+      <p>Sign in to your account to continue</p>
+    </div>
+
+    <div class="login-content">
+      <button
+        class="login-btn"
+        (click)="login()"
+        [disabled]="isLoading">
+        <span *ngIf="!isLoading">Login with Keycloak</span>
+        <span *ngIf="isLoading">Logging in...</span>
+      </button>
+
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+      <button
+        class="signup-btn"
+        (click)="signUp()"
+        [disabled]="isLoading">
+        <span *ngIf="!isLoading">Create New Account</span>
+        <span *ngIf="isLoading">Redirecting...</span>
+      </button>
+    </div>
+  </div>
+</div>
+
