@@ -1,3 +1,33 @@
-<p>navbar works!</p>
+<nav class ="navbar">
+  <div class="nav-left">
+    <a routerLink="/" class="logo">Shophub</a>
+  </div>
+
+  <div class="nav-search">
+    <input
+      type="text"
+      placeholder="Search products"
+      [(ngModel)]="searchText"
+      (input)="onSearch()"
+    />
+    <button class>🔍</button>
+  </div>
+
+  <div class="nav-right">
+    <a routerLink="/" class="nav-link">Home</a>
+    <a routerLink="/categories">Categories</a>
+    <a routerLink="/orders" class="nav-link">Orders</a>
+    @if(isLoggedIn){
+      <a routerLink="/cart" class="cart-btn">🛒 Cart</a>
+    }
+
+
+    <div class="auth-section" *ngIf="isLoggedIn">
+      <span class="username">👤 {{ username }}</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+    <button class="login-btn" *ngIf="!isLoggedIn" (click)="login()">Login</button>
+  </div>
+</nav>
 
 
