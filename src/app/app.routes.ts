@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { Cart } from './components/cart/cart.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { canActivateAuthRole } from './auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -15,7 +16,9 @@ export const routes: Routes = [
   },
   {
     path: 'cart',
-    component: Cart,
+    loadComponent:()=>import('./pages/cart/cart.component').then(m=>m.CartComponent),
+    canActivate:[canActivateAuthRole],
+    data:{role:['ROLE_USER']},
     title: 'Cart - ShopHub'
   },
   // TODO: Uncomment and implement when page components are created
@@ -24,21 +27,21 @@ export const routes: Routes = [
   //   loadComponent: () => import('./pages/home-page/product-details/product-details.component').then(m => m.ProductDetailsComponent),
   //   title: 'Product Details - ShopHub'
   // },
-  // {
-  //   path: 'checkout',
-  //   loadComponent: () => import('./pages/home-page/product-details/checkout/checkout.component').then(m => m.CheckoutComponent),
-  //   title: 'Checkout - ShopHub'
-  // },
+  {
+    path: 'checkout',
+    loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent),
+    title: 'Checkout - ShopHub'
+  },
   // {
   //   path: 'orders',
   //   loadComponent: () => import('./pages/home-page/product-details/checkout/orders/orders.component').then(m => m.OrdersComponent),
   //   title: 'Orders - ShopHub'
   // },
-  // {
-  //   path: 'login',
-  //   loadComponent: () => import('./pages/home-page/product-details/checkout/orders/login-page/login-page.component').then(m => m.LoginPageComponent),
-  //   title: 'Login - ShopHub'
-  // },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
+    title: 'Login - ShopHub'
+  },
   {
     path: '**',
     redirectTo: '',
