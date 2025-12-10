@@ -1,28 +1,32 @@
 @if (isLoading) {
-  <div class="loading">
-    Loading Products
-  </div>
+  <div class="loading">Loading Products...</div>
 }
 
 @if (!isLoading && products.length > 0) {
   <div class="product-grid">
     @for (product of products; track $index) {
       <div class="product-card">
+
         <img
-          [src]="product.img_url_main || product.images[0]?.image_url"
-          [alt]="product.product_name || 'Product image'"
-        >
+          [src]="product.image_url_main"
+          alt="{{ product.product_name }}"
+        />
+
         <h3 class="name">{{ product.product_name }}</h3>
-        <p class="price">{{ product.price | currency }}</p>
+
+        <p class="price">Rs. {{ product.product_price }}</p>
+
+        @if (isLoggedIn){
+          <button type="button" class="add-btn" (click)="addToCart(product)">Add To Cart</button>
+        }@else {
+          <button type="button" class="add-btn" (click)="forceLogin()">Add to cart</button>
+        }
+
       </div>
     }
   </div>
 }
 
 @if (!isLoading && products.length === 0) {
-  <div class="no-products">
-    No products found
-  </div>
+  <div class="no-products">No products found.</div>
 }
-
-
